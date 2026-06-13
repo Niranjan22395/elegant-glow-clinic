@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar */
+@layer base {
+  * {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-body text-elegant-black bg-elegant-background antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  /* Custom scrollbar for webkit browsers */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-elegant-grey-light;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gold-primary rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gold-accent;
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-md;
+  }
+
+  .gold-gradient-text {
+    @apply bg-gradient-to-r from-gold-primary to-gold-accent bg-clip-text text-transparent;
+  }
+}
+
+/* Focus visible styles for accessibility */
+@layer base {
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold-primary;
+  }
+
+  button:focus-visible,
+  a:focus-visible {
+    @apply ring-2 ring-gold-primary ring-offset-2;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Made with Bob */
