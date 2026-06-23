@@ -7,7 +7,7 @@ const Home: React.FC = () => {
   return (
     <div className="bg-elegant-background">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center bg-gradient-dark">
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-dark pt-20 md:pt-0">
         <div className="absolute inset-0 bg-black/50 z-0" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1920')] bg-cover bg-center z-0" />
         
@@ -15,30 +15,30 @@ const Home: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 text-center px-4 max-w-4xl mx-auto"
+          className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto py-12"
         >
           <h1
-            className="font-heading text-5xl md:text-7xl font-bold mb-6 text-gray-900"
+            className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 text-gray-900 leading-tight"
             style={{ textShadow: '2px 2px 8px rgba(255,255,255,0.9), -1px -1px 4px rgba(255,255,255,0.7)' }}
           >
             Enhance Your Natural Beauty
           </h1>
           <p
-            className="font-body text-xl md:text-2xl mb-8 text-gray-800"
+            className="font-body text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-gray-800 leading-relaxed"
             style={{ textShadow: '1px 1px 6px rgba(255,255,255,0.9), -1px -1px 3px rgba(255,255,255,0.7)' }}
           >
             Premium Skin, Hair & Aesthetic Treatments in Bokaro
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+            <Link
               to="/appointment"
-              className="bg-gold-primary hover:bg-gold-accent text-white px-8 py-4 rounded-full font-semibold text-lg transition-all transform hover:scale-105 shadow-gold-glow"
+              className="w-full sm:w-auto bg-gold-primary hover:bg-gold-accent text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg transition-all transform hover:scale-105 shadow-gold-glow text-center"
             >
               Book Appointment
             </Link>
-            <a 
+            <a
               href="tel:+917488172473"
-              className="bg-white hover:bg-gray-100 text-gold-primary px-8 py-4 rounded-full font-semibold text-lg transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+              className="w-full sm:w-auto bg-white hover:bg-gray-100 text-gold-primary px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg transition-all transform hover:scale-105 flex items-center justify-center gap-2"
             >
               <FaPhone /> Call Now
             </a>
@@ -50,9 +50,9 @@ const Home: React.FC = () => {
           href="https://wa.me/917488172473?text=Hello%2C%20I%20want%20to%20book%20an%20appointment"
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all transform hover:scale-110"
+          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-3 sm:p-4 rounded-full shadow-lg transition-all transform hover:scale-110"
         >
-          <FaWhatsapp size={32} />
+          <FaWhatsapp className="w-6 h-6 sm:w-8 sm:h-8" />
         </a>
       </section>
 

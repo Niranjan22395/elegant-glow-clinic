@@ -50,15 +50,16 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/98 backdrop-blur-md shadow-elegant-md py-4'
-          : 'bg-neutral-900/98 backdrop-blur-sm py-6'
-      }`}
-      role="navigation"
-      aria-label="Main navigation"
-    >
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'bg-white/98 backdrop-blur-md shadow-elegant-md py-4'
+            : 'bg-neutral-900/98 backdrop-blur-sm py-6'
+        }`}
+        role="navigation"
+        aria-label="Main navigation"
+      >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -131,16 +132,26 @@ export const Navbar: React.FC = () => {
           </button>
         </div>
       </div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+          onClick={() => setIsMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
 
       {/* Mobile Menu */}
       <div
         id="mobile-menu"
-        className={`lg:hidden fixed inset-0 top-[72px] bg-white transform transition-transform duration-300 mobile-menu ${
+        className={`lg:hidden fixed top-0 right-0 bottom-0 w-[280px] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out mobile-menu z-50 ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         aria-hidden={!isMobileMenuOpen}
       >
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full pt-20">
           {/* Mobile Navigation Links */}
           <div className="flex-1 overflow-y-auto py-6 px-4">
             <div className="space-y-2">
@@ -182,16 +193,7 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div
-          className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm"
-          onClick={() => setIsMobileMenuOpen(false)}
-          aria-hidden="true"
-        />
-      )}
-    </nav>
+    </>
   );
 };
 
