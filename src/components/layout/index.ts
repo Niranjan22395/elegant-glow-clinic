@@ -1,6 +1,5 @@
 export { Navbar } from './Navbar';
 export { Footer } from './Footer';
-export { Layout } from './Layout';
-export type { LayoutProps } from './Layout';
+export { default as Layout } from './Layout';
 
 // Made with Bob

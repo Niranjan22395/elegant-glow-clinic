@@ -26,7 +26,7 @@ export default {
       },
       fontFamily: {
         heading: ['Playfair Display', 'serif'],
-        body: ['Inter', 'sans-serif'],
+        body: ['Poppins', 'sans-serif'],
       },
       fontSize: {
         'xs': '0.75rem',

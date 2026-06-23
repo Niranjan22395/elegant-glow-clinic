@@ -1,32 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone } from 'lucide-react';
 import { NAV_LINKS, CONTACT_INFO } from '../../lib/constants';
-import { scrollToElement } from '../../lib/utils';
 import { Button } from '../ui';
 import { Logo } from '../ui/Logo';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const location = useLocation();
 
   // Handle scroll for sticky navbar
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-      
-      // Update active section based on scroll position
-      const sections = NAV_LINKS.map(link => link.id);
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -55,10 +42,11 @@ export const Navbar: React.FC = () => {
     }
   }, [isMobileMenuOpen]);
 
-  const handleNavClick = (href: string) => {
-    const sectionId = href.replace('#', '');
-    scrollToElement(sectionId);
-    setIsMobileMenuOpen(false);
+  // Helper function to check if a link is active
+  const isActive = (href: string) => {
+    if (href === '/' && location.pathname === '/') return true;
+    if (href !== '/' && location.pathname.startsWith(href)) return true;
+    return false;
   };
 
   return (
@@ -66,7 +54,7 @@ export const Navbar: React.FC = () => {
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
           ? 'bg-white/98 backdrop-blur-md shadow-elegant-md py-4'
-          : 'bg-neutral-900/95 backdrop-blur-sm py-6'
+          : 'bg-neutral-900/98 backdrop-blur-sm py-6'
       }`}
       role="navigation"
       aria-label="Main navigation"
@@ -74,12 +62,8 @@ export const Navbar: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a
-            href="#home"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick('#home');
-            }}
+          <Link
+            to="/"
             className="group"
             aria-label="Elegant Glow Aesthetic Clinic - Home"
           >
@@ -87,33 +71,31 @@ export const Navbar: React.FC = () => {
               size="sm"
               variant={isScrolled ? 'dark' : 'light'}
             />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.id}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(link.href);
-                }}
+                to={link.href}
                 className={`text-sm font-medium transition-colors relative group ${
-                  activeSection === link.id
+                  isScrolled
+                    ? isActive(link.href)
+                      ? 'text-primary'
+                      : 'text-neutral-800 hover:text-primary'
+                    : isActive(link.href)
                     ? 'text-primary'
-                    : isScrolled
-                    ? 'text-neutral-800 hover:text-primary'
                     : 'text-white hover:text-primary'
                 }`}
               >
                 {link.label}
                 <span
                   className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-primary transition-all group-hover:w-full ${
-                    activeSection === link.id ? 'w-full' : ''
+                    isActive(link.href) ? 'w-full' : ''
                   }`}
                 />
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -125,13 +107,14 @@ export const Navbar: React.FC = () => {
               <Phone className="w-5 h-5" />
               <span className="font-medium">{CONTACT_INFO.phone}</span>
             </a>
-            <Button
-              onClick={() => handleNavClick('#contact')}
-              variant="primary"
-              size="md"
-            >
-              Book Appointment
-            </Button>
+            <Link to="/appointment">
+              <Button
+                variant="primary"
+                size="md"
+              >
+                Book Appointment
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -162,21 +145,18 @@ export const Navbar: React.FC = () => {
           <div className="flex-1 overflow-y-auto py-6 px-4">
             <div className="space-y-2">
               {NAV_LINKS.map((link) => (
-                <a
+                <Link
                   key={link.id}
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(link.href);
-                  }}
+                  to={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className={`block px-4 py-3 rounded-lg text-lg font-medium transition-colors ${
-                    activeSection === link.id
+                    isActive(link.href)
                       ? 'bg-gold-primary text-white'
                       : 'text-elegant-black hover:bg-elegant-grey-light'
                   }`}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -190,14 +170,15 @@ export const Navbar: React.FC = () => {
               <Phone className="w-5 h-5" />
               <span>{CONTACT_INFO.phone}</span>
             </a>
-            <Button
-              onClick={() => handleNavClick('#contact')}
-              variant="primary"
-              size="lg"
-              className="w-full"
-            >
-              Book Appointment
-            </Button>
+            <Link to="/appointment" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button
+                variant="primary"
+                size="lg"
+                className="w-full"
+              >
+                Book Appointment
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

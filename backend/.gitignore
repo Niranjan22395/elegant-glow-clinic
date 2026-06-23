@@ -3,7 +3,6 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
 
 # Environment variables
 .env
@@ -14,20 +13,25 @@ pnpm-debug.log*
 
 # Build output
 dist/
-dist-ssr/
 build/
-*.local
+*.js
+*.js.map
+!jest.config.js
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
+# Uploads
+uploads/*
+!uploads/.gitkeep
+
+# IDE
+.vscode/
 .idea/
+*.swp
+*.swo
+*~
+
+# OS
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
 
 # Logs
 logs/
@@ -40,20 +44,5 @@ coverage/
 # Temporary files
 tmp/
 temp/
-*.tmp
-
-# OS
-Thumbs.db
-.DS_Store
-
-# Backend specific
-backend/dist/
-backend/node_modules/
-backend/uploads/*
-!backend/uploads/.gitkeep
-backend/.env
-
-# Docker
-docker-compose.override.yml
 
 # Made with Bob

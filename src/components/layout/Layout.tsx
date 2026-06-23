@@ -1,21 +1,24 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 
-export interface LayoutProps {
-  children: React.ReactNode;
+interface LayoutProps {
+  children?: React.ReactNode;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1">
-        {children}
+        {children || <Outlet />}
       </main>
       <Footer />
     </div>
   );
 };
+
+export default Layout;
 
 // Made with Bob

@@ -29,12 +29,12 @@ export const GOOGLE_FORM_FIELDS = {
 
 // Navigation links
 export const NAV_LINKS: NavLink[] = [
-  { id: 'home', label: 'Home', href: '#home' },
-  { id: 'about', label: 'About', href: '#about' },
-  { id: 'services', label: 'Services', href: '#services' },
-  { id: 'gallery', label: 'Gallery', href: '#gallery' },
-  { id: 'testimonials', label: 'Testimonials', href: '#testimonials' },
-  { id: 'contact', label: 'Contact', href: '#contact' },
+  { id: 'home', label: 'Home', href: '/' },
+  { id: 'about', label: 'About', href: '/about' },
+  { id: 'services', label: 'Services', href: '/services' },
+  { id: 'gallery', label: 'Gallery', href: '/gallery' },
+  { id: 'testimonials', label: 'Testimonials', href: '/testimonials' },
+  { id: 'contact', label: 'Contact', href: '/contact' },
 ];
 
 // Service categories
