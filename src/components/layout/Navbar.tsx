@@ -22,15 +22,24 @@ export const Navbar: React.FC = () => {
 
   // Close mobile menu when clicking outside
   useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (isMobileMenuOpen && !target.closest('.mobile-menu') && !target.closest('.mobile-menu-button')) {
+      if (!target.closest('.mobile-menu') && !target.closest('.mobile-menu-button')) {
         setIsMobileMenuOpen(false);
       }
     };
 
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
+    // Add listener with a small delay to avoid catching the opening click
+    const timeoutId = setTimeout(() => {
+      document.addEventListener('mousedown', handleClickOutside);
+    }, 100);
+
+    return () => {
+      clearTimeout(timeoutId);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, [isMobileMenuOpen]);
 
   // Prevent body scroll when mobile menu is open
